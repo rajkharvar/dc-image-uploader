@@ -1,45 +1,32 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from "react";
+import { useDropzone } from "react-dropzone";
+
+import ImagePH from "./assets/image-ph.png";
+import "./App.scss";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { acceptedFiles, getRootProps, getInputProps, fileRejections } =
+    useDropzone({
+      accept: "image/jpeg, image/png, image/jpg",
+      maxFiles: 1,
+      noClick: true,
+    });
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <section className="container">
+        <span>Upload your image</span>
+        <p>File should be jpeg, jpg or png</p>
+        <div {...getRootProps({ className: "dropzone" })} className="dropzone">
+          <img src={ImagePH} alt="Image placeholder" className="image-ph" />
+          <input {...getInputProps()} />
+          <p>Drag & Drop your image here</p>
+        </div>
+        <p>Or</p>
+        <button>Choose a file</button>
+      </section>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
