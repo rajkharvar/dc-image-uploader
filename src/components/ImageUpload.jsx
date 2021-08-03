@@ -1,15 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { AiFillCheckCircle } from "react-icons/ai";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import ImagePH from "../assets/image-ph.png";
+import Loader from "./Loader";
+import Preview from "./Preview";
 
 const ImageUpload = () => {
-  console.log(import.meta.env);
   const hiddenFileInput = useRef(null);
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const { acceptedFiles, getRootProps, getInputProps, fileRejections } =
     useDropzone({
@@ -54,8 +58,17 @@ const ImageUpload = () => {
       .then((response) => {
         setUploading(false);
         setImageUrl(response.secure_url);
+      })
+      .catch((err) => {
+        setUploading(false);
       });
   };
+
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [copied]);
 
   return (
     <>
@@ -85,12 +98,9 @@ const ImageUpload = () => {
             />
           </>
         )}
-        {uploading && <h1>Uploading ...</h1>}
-        {imageUrl && (
-          <>
-            <img src={imageUrl} placeholder="Uploaded image" />
-            <button>Copy to Clip</button>
-          </>
+        {uploading && <Loader />}
+        {imageUrl && !uploading && (
+          <Preview imageUrl={imageUrl} setCopied={setCopied} copied={copied} />
         )}
       </section>
     </>

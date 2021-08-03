@@ -47,9 +47,39 @@
     }
 
     @media screen and (max-width: 480px) {
+      top: 38%;
       width: 60%;
-      height: 40%;
       position: absolute;
+      margin: 0 auto;
+    }
+
+    .preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .check-icon {
+        margin-bottom: 16px;
+      }
+
+      img {
+        max-width: 360px;
+        max-height: 300px;
+      }
+
+      .clipboard-container {
+        display: flex;
+
+        input {
+          display: flex;
+          flex: 2;
+        }
+
+        button {
+          display: flex;
+          flex: 1;
+        }
+      }
     }
   }
 }
