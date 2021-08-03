@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { AiFillCheckCircle } from "react-icons/ai";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import ImagePH from "../assets/image-ph.png";
 import Loader from "./Loader";
@@ -11,7 +9,6 @@ const ImageUpload = () => {
   const hiddenFileInput = useRef(null);
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [copied, setCopied] = useState(false);
 
