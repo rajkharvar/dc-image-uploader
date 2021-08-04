@@ -12,7 +12,7 @@ const Preview = ({ imageUrl, setCopied, copied }) => {
       <div className="clipboard-container">
         <input type="text" placeholder={imageUrl} disabled />
         <CopyToClipboard text={imageUrl} onCopy={() => setCopied(true)}>
-          <button>Copy Link</button>
+          <button className="button">Copy Link</button>
         </CopyToClipboard>
       </div>
       {copied && <span>Copied!!!</span>}
