@@ -4,5 +4,7 @@ Image Uploader is the [devchallenge](https://devchallenges.io/challenges/O2iGT9y
 ## Tech Stack
 
 **Client:** React (Vite)
+
 **Image Upload API:** Cloudinary
+
 **Deployment:** Vercel
