@@ -27,8 +27,12 @@ const ImageUpload = () => {
     setImage(event.target.files[0]);
   };
 
+  const fileRejectionItems = fileRejections.map(({ file, errors }) =>
+    errors.map((e) => <p key={e.code}>{e.message}</p>)
+  );
+
   useEffect(() => {
-    if (acceptedFiles.length) {
+    if (acceptedFiles.length === 1) {
       setImage(acceptedFiles[0]);
     }
   }, [acceptedFiles]);
@@ -93,6 +97,7 @@ const ImageUpload = () => {
               accept=".jpg,.jpeg,.png"
               onChange={handleChange}
             />
+            {fileRejectionItems}
           </>
         )}
         {uploading && <Loader />}
