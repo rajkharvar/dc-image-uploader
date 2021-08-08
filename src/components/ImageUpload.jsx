@@ -47,9 +47,9 @@ const ImageUpload = () => {
     setUploading(true);
     const data = new FormData();
 
-    data.append("file", image);
-    data.append("upload_preset", "dc-image-uploader");
-    data.append("cloud_name", "dc-image-uploader");
+    data.append("dc-image-uploader", image);
+    // data.append("upload_preset", "dc-image-uploader");
+    // data.append("cloud_name", "dc-image-uploader");
 
     fetch(import.meta.env.VITE_CLOUDINARY_URL, {
       method: "post",
@@ -58,7 +58,7 @@ const ImageUpload = () => {
       .then((res) => res.json())
       .then((response) => {
         setUploading(false);
-        setImageUrl(response.secure_url);
+        setImageUrl(response.filePath);
       })
       .catch((err) => {
         setUploading(false);
