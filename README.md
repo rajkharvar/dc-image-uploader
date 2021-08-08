@@ -1,5 +1,5 @@
 # Image Uploader
-Image Uploader is the [devchallenge](https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx) from full stack developer path.
+Image Uploader is the [devchallenge](https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx) project from full stack developer path.
 
 ## Tech Stack
 
