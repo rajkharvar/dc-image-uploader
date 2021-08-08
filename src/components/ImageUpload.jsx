@@ -49,14 +49,14 @@ const ImageUpload = () => {
 
     data.append("dc-image-uploader", image);
 
-    fetch(import.meta.env.VITE_CLOUDINARY_URL, {
+    fetch(import.meta.env.VITE_SERVER_URL, {
       method: "post",
       body: data,
     })
       .then((res) => res.json())
       .then((response) => {
         setUploading(false);
-        setImageUrl(response.secure_url);
+        setImageUrl(response.filePath);
       })
       .catch((err) => {
         setUploading(false);
