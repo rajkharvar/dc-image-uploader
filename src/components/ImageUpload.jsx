@@ -5,6 +5,8 @@ import ImagePH from "../assets/image-ph.png";
 import Loader from "./Loader";
 import Preview from "./Preview";
 
+import "./imageUpload.scss";
+
 const ImageUpload = () => {
   const hiddenFileInput = useRef(null);
   const [image, setImage] = useState(null);

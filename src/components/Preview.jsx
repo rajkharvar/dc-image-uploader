@@ -2,6 +2,8 @@ import React from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+import "./preview.scss";
+
 const Preview = ({ imageUrl, setCopied, copied }) => {
   return (
     <div className="preview">
