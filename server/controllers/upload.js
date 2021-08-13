@@ -30,11 +30,24 @@ const upload = multer({
   limits: {
     fileSize: 1024 * 1024 * 5,
   },
-});
+}).single("dc-image-uploader");
 
 const uploadController = (req, res, file) => {
-  const fullUrl = `${req.protocol}://${req.get("host")}/${req.file.filename}`;
-  res.send({ filePath: fullUrl });
+  upload(req, res, function (err) {
+    if (err) {
+      // Check for multer error
+      if (err instanceof multer.MulterError) {
+        res.status(400).send({ err: err.message });
+      } else {
+        res.status(400).send({ err: "Unknown error occured" });
+      }
+    } else {
+      const fullUrl = `${req.protocol}://${req.get("host")}/${
+        req.file.filename
+      }`;
+      res.send({ filePath: fullUrl });
+    }
+  });
 };
 
 module.exports = { uploadController, upload };

@@ -16,6 +16,11 @@
   p {
     font-size: 12px;
     font-weight: lighter;
+
+    &.error {
+      color: red;
+      font-weight: normal;
+    }
   }
 
   .dropzone {

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import axios from "axios";
 
 import ImagePH from "../assets/image-ph.png";
 import Loader from "./Loader";
 import Preview from "./Preview";
-
 import "./imageUpload.scss";
 
 const ImageUpload = () => {
@@ -13,6 +13,7 @@ const ImageUpload = () => {
   const [uploading, setUploading] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState(null);
 
   const { acceptedFiles, getRootProps, getInputProps, fileRejections } =
     useDropzone({
@@ -45,24 +46,22 @@ const ImageUpload = () => {
     }
   }, [image]);
 
-  const uploadImage = () => {
+  const uploadImage = async () => {
+    setError(null);
     setUploading(true);
     const data = new FormData();
 
     data.append("dc-image-uploader", image);
 
-    fetch(import.meta.env.VITE_SERVER_URL, {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        setUploading(false);
-        setImageUrl(response.filePath);
-      })
-      .catch((err) => {
-        setUploading(false);
-      });
+    try {
+      const res = await axios.post(import.meta.env.VITE_SERVER_URL, data);
+      setImageUrl(res.data.filePath);
+      setUploading(false);
+    } catch (error) {
+      const { err } = error.response.data;
+      setError(err);
+      setUploading(false);
+    }
   };
 
   useEffect(() => {
@@ -98,6 +97,7 @@ const ImageUpload = () => {
               onChange={handleChange}
             />
             {fileRejectionItems}
+            {error && <p className="error">{error}</p>}
           </>
         )}
         {uploading && <Loader />}
