@@ -11,7 +11,7 @@ app.use(cors());
 
 app.get("/", (req, res) => res.send("Hello World!!!"));
 
-app.post("/upload", upload.single("dc-image-uploader"), uploadController);
+app.post("/upload", uploadController);
 app.get("/:fileName", fileController);
 
 app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`));
