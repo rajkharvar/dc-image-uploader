@@ -14,6 +14,8 @@ const fileController = (req, res, next) => {
           next();
         }
       });
+    } else {
+      res.status(404).send({ message: "No such file exists" });
     }
   } catch (error) {
     res.status(404).send({ message: "No such file exists" });
